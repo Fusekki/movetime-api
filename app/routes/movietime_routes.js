@@ -18,7 +18,7 @@ module.exports = function (app, db) {
     app.get('/users/:id', (req, res) => {
         const id = req.params.id;
         const details = {
-            '_id': new ObjectID(id)
+            'id': new ObjectID(id)
         };
         db.collection('movietimes').findOne(details, (err, item) => {
             if (err) {
@@ -36,8 +36,9 @@ module.exports = function (app, db) {
         // console.log(req.body);
         // res.send('Hello')
         const user = {
-            name: req.body.name,
-            email: req.body.email
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
         };
         db.collection('movietimes').insert(user, (err, result) => {
             if (err) {
@@ -53,7 +54,7 @@ module.exports = function (app, db) {
     app.delete('/users/:id', (req, res) => {
         const id = req.params.id;
         const details = {
-            '_id': new ObjectID(id)
+            'id': new ObjectID(id)
         };
         db.collection('movietimes').remove(details, (err, item) => {
             if (err) {
@@ -68,7 +69,7 @@ module.exports = function (app, db) {
 
     app.put('/users/:id', (req, res) => {
         const id = req.params.id;
-        const details = { '_id': new ObjectID(id) };
+        const details = { 'id': new ObjectID(id) };
         const user = { name: req.body.name, email: req.body.email };
         db.collection('movietimes').update(details, user, (err, result) => {
           if (err) {
