@@ -14,6 +14,7 @@ module.exports = function(app, db) {
         });
     
     });
+
     app.post('/users', (req, res) => {
         // console.log(req.body);
         // res.send('Hello')
@@ -26,6 +27,18 @@ module.exports = function(app, db) {
           }
         });
     });
+
+    app.delete('/users/:id', (req, res) => {
+        const id = req.params.id;
+        const details = { '_id': new ObjectID(id) };
+        db.collection('movietimes').remove(details, (err, item) => {
+          if (err) {
+            res.send({'error':'An error has occurred'});
+          } else {
+            res.send('User ' + id + ' deleted!');
+          } 
+        });
+      });
 
 
 };
