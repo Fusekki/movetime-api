@@ -53,5 +53,18 @@ module.exports = function (app, db) {
         });
     });
 
+    app.put('/users/:id', (req, res) => {
+        const id = req.params.id;
+        const details = { '_id': new ObjectID(id) };
+        const user = { name: req.body.name, email: req.body.email };
+        db.collection('movietimes').update(details, user, (err, result) => {
+          if (err) {
+              res.send({'error':'An error has occurred'});
+          } else {
+              res.send(user);
+          } 
+        });
+      });
+
 
 };
