@@ -3,7 +3,7 @@ var ObjectID = require('mongodb').ObjectID;
 module.exports = function (app, db) {
 
     app.get('/users', (req, res) => {
-        db.collection('movietimes').find().toArray((err, result) => {
+        db.collection('users').find().toArray((err, result) => {
             if (err) {
                 res.send({
                     'error': 'An error has occurred'
@@ -20,7 +20,7 @@ module.exports = function (app, db) {
         const details = {
             'id': new ObjectID(id)
         };
-        db.collection('movietimes').findOne(details, (err, item) => {
+        db.collection('users').findOne(details, (err, item) => {
             if (err) {
                 res.send({
                     'error': 'An error has occurred'
@@ -40,7 +40,7 @@ module.exports = function (app, db) {
             firstName: req.body.firstName,
             lastName: req.body.lastName
         };
-        db.collection('movietimes').insert(user, (err, result) => {
+        db.collection('users').insert(user, (err, result) => {
             if (err) {
                 res.send({
                     'error': 'An error has occurred'
@@ -56,7 +56,7 @@ module.exports = function (app, db) {
         const details = {
             'id': new ObjectID(id)
         };
-        db.collection('movietimes').remove(details, (err, item) => {
+        db.collection('users').remove(details, (err, item) => {
             if (err) {
                 res.send({
                     'error': 'An error has occurred'
@@ -71,7 +71,7 @@ module.exports = function (app, db) {
         const id = req.params.id;
         const details = { 'id': new ObjectID(id) };
         const user = { name: req.body.name, email: req.body.email };
-        db.collection('movietimes').update(details, user, (err, result) => {
+        db.collection('users').update(details, user, (err, result) => {
           if (err) {
               res.send({'error':'An error has occurred'});
           } else {
