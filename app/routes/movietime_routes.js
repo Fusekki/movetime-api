@@ -1,4 +1,5 @@
 var ObjectID = require('mongodb').ObjectID;
+var User = require('../models/user.js');
 
 module.exports = function (app, db) {
 
@@ -67,11 +68,13 @@ module.exports = function (app, db) {
         });
     });
 
-    app.put('/users/:id', (req, res) => {
+    app.put('/users/', (req, res) => {
+        console.log(req.body);
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
-        const user = { name: req.body.name, email: req.body.email };
-        db.collection('users').update(details, user, (err, result) => {
+        const user = { email: req.body.email, firstName: req.body.firstName, lastName: req.body.lastName, zipcode: req.body.zipcode, theaters: req.body.theaters };
+        console.log(user);
+        db.collection('users').update(details, user.email, (err, result) => {
           if (err) {
               res.send({'error':'An error has occurred'});
           } else {
