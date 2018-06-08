@@ -8,7 +8,13 @@ Requires the following dependencies:
 * MongoDB
 * Body-Parser
 * NoDemon (suggested but not required)
+
 ```
 npm install --save express mongodb body-parser
 npm install --save-dev nodemon
+```
+
+To run
+``` 
+npm run dev
 ```
