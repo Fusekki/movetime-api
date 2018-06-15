@@ -72,11 +72,15 @@ module.exports = function (app, db) {
         console.log('put request.');
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
+        let theaters = req.body.theaters;
+        if (theaters !== undefined) {
+            theaters = req.body.theaters.split();
+        }
         const user = { email: req.body.email,
             firstName: req.body.firstName, 
             lastName: req.body.lastName, 
             zipcode: req.body.zipcode, 
-            theaters: req.body.theaters };
+            theaters: theaters };
         console.log(user);
         console.log(req.body);
         console.log(req.params);
