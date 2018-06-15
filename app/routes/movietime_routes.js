@@ -69,6 +69,7 @@ module.exports = function (app, db) {
     });
 
     app.put('/users/:id', (req, res) => {
+        console.log('put request.');
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
         const user = { email: req.body.email,
