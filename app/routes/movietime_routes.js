@@ -74,7 +74,7 @@ module.exports = function (app, db) {
         const details = { '_id': new ObjectID(id) };
         let theaters = req.body.theaters;
         if (theaters !== undefined) {
-            theaters = req.body.theaters.split();
+            theaters = req.body.theaters.split().map(x => x = parseInt(x));
         }
         const user = { email: req.body.email,
             firstName: req.body.firstName, 
@@ -82,8 +82,8 @@ module.exports = function (app, db) {
             zipcode: req.body.zipcode, 
             theaters: theaters };
         console.log(user);
-        console.log(req.body);
-        console.log(req.params);
+        // console.log(req.body);
+        // console.log(req.params);
         db.collection('users').update(details, user, (err, result) => {
           if (err) {
               res.send({'error':'An error has occurred'});
