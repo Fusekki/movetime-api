@@ -69,12 +69,14 @@ module.exports = function (app, db) {
     });
 
     app.put('/users/:id', (req, res) => {
-        console.log('put request.');
+        console.log('put request - ' + Date.now().toString());
         const id = req.params.id;
         const details = { '_id': new ObjectID(id) };
         let theaters = req.body.theaters;
         if (theaters !== undefined) {
-            theaters = req.body.theaters.split().map(x => x = parseInt(x));
+            console.log(theaters);
+            theaters = req.body.theaters.split(',').map(x => parseInt(x));
+            console.log(theaters);
         }
         const user = { email: req.body.email,
             firstName: req.body.firstName, 
@@ -89,6 +91,7 @@ module.exports = function (app, db) {
               res.send({'error':'An error has occurred'});
           } else {
               res.send(user);
+              console.log('DB Uodated.');
           } 
         });
       });
